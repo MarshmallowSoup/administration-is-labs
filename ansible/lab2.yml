@@ -1,0 +1,11 @@
+---
+- name: update /etc/hostname
+  hosts: remote_host
+  become: yes
+  tasks:
+    - name: update /etc/hostname
+      lineinfile:
+        path: /etc/hostname
+        regexp: '^.*$'
+        line: "volodymyr-lysetskyi-lab2"
+

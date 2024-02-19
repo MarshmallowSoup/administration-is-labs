@@ -1,0 +1,12 @@
+# Перша частина плейбуку для установки пакету nginx на хостах з групи ubuntu
+# Виконуємо на хостах з групи ubuntu
+- hosts: ubuntu  
+  become: yes  # Запускаємо під привілеями адміністратора
+  roles:
+    - { role: install_package, package_name: "nginx" }  # Використовуємо роль install_package для встановлення пакету nginx
+
+# Друга частина плейбуку для установки пакету nginx на хостах з групи aws_linux
+- hosts: aws_linux  # Виконуємо на хостах з групи aws_linux
+  become: yes  # Запускаємо під привілеями адміністратора
+  roles:
+    - { role: install_package, package_name: "nginx" }

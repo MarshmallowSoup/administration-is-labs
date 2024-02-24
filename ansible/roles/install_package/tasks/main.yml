@@ -1,0 +1,30 @@
+
+# Визначення менеджера пакетів залежно від типу дистрибутиву
+- name: Determine package manager
+  set_fact:
+    package_manager: "{{ 'apt' if ansible_pkg_mgr == 'apt' else 'dnf' }}"
+
+# Виводимо повідомлення про визначення дистрибутиву та використаний пакетний менеджер
+- debug:
+    msg: "Detected Linux distribution: {{ ansible_distribution }}. Using {{ package_manager }} package manager."
+
+# Встановлюємо пакет залежно від пакетного менеджера (apt)
+- name: Install package
+  package:
+    name: "{{ package_name }}"
+    state: present
+  when: package_manager == 'apt'
+
+- name: Install package
+  ansible.builtin.dnf:
+    name: "{{ package_name }}"
+    state: present
+  when: package_manager == 'dnf'
+  
+# Забезпечуємо запуск та активування служби Nginx
+- name: Ensure Nginx service is started and enabled
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+

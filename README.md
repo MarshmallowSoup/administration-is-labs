@@ -5,3 +5,6 @@ This repository contains labs related to the Administration of Information Syste
 ## Author
 - Volodymyr Lysetskyi
 - Student of LPNU, Group IT-31
+
+
+- Test string
